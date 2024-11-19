@@ -6,6 +6,7 @@ import {
   twitter,
   upArrow,
   downArrow,
+  communityIcon,
 } from "../../asset";
 
 type DropdownOption = string;
@@ -13,22 +14,15 @@ type DropdownOption = string;
 const Navbar: React.FC = () => {
 
   const [isSolutionOpen, setSolutionOpen] = useState<boolean>(false);
-  const [isDocsOpen, setDocsOpen] = useState<boolean>(false);
-  const [isCommunityOpen, setCommunityOpen] = useState<boolean>(false);
+  const [isResourcesOpen, setResourcesOpen] = useState<boolean>(false);
 
-  const toggleDropdown = (menu: 'solution' | 'docs' | 'community'): void => {
+  const toggleDropdown = (menu: 'solution' | 'resources'): void => {
     if (menu === "solution") {
       setSolutionOpen(!isSolutionOpen);
-      setDocsOpen(false);
-      setCommunityOpen(false);
-    } else if (menu === "docs") {
-      setDocsOpen(!isDocsOpen);
+      setResourcesOpen(false);
+    } else if (menu === "resources") {
+      setResourcesOpen(!isResourcesOpen);
       setSolutionOpen(false);
-      setCommunityOpen(false);
-    } else if (menu === "community") {
-      setCommunityOpen(!isCommunityOpen);
-      setSolutionOpen(false);
-      setDocsOpen(false);
     }
   };
 
@@ -40,7 +34,7 @@ const Navbar: React.FC = () => {
             {options.map((option, index) => (
               <li
                 key={index}
-                className="flex items-center px-4 py-2 hover:text-[#A49BFF] cursor-pointer"
+                className="flex items-center px-4 py-2 hover:text-primary-light cursor-pointer"
               >
                 {option === "Whitepaper" ? (
                   <a href="https://polycruz.gitbook.io/polycruz-whitepaper/" target="_blank" rel="noopener noreferrer">
@@ -60,7 +54,7 @@ const Navbar: React.FC = () => {
                 {option === "Analytics" && (
                   <>
                     &nbsp;
-                    <p className="bg-gray-800 text-[#A49BFF] px-2 rounded-xl text-sm mt-1">
+                    <p className="bg-gray-800 text-primary-light px-2 rounded-xl text-sm mt-1">
                       Beta
                     </p>
                   </>
@@ -81,17 +75,17 @@ const Navbar: React.FC = () => {
       <div className="flex items-center gap-20">
         <img src={polycruz_logo} height={140} width={140} alt="Polycruz" />
         <div className="hidden md:flex relative">
-          <ul className="flex gap-3 lg:gap-6 text-[#777e90] text-md font-medium">
+          <ul className="flex gap-3 lg:gap-6 text-light-text-color text-md font-medium">
             <li
               onClick={() => toggleDropdown("solution")}
-              className={`cursor-pointer flex items-center gap-1 text-[#777E90] ${isSolutionOpen ? "border-b border-[#A49BFF] text-[#A49BFF]" : ""
+              className={`cursor-pointer flex items-center gap-1 text-light-text-color ${isSolutionOpen ? "border-b border-primary-light text-primary-light" : ""
                 }`}
             >
               Solution
               <img
                 src={isSolutionOpen ? upArrow : downArrow}
-                alt=""
-                className="mt-1 text-[#A49BFF]"
+                alt="arrow"
+                className="mt-1 text-primary-light"
               />
             </li>
             {renderDropdown(isSolutionOpen, [
@@ -104,51 +98,45 @@ const Navbar: React.FC = () => {
             ])}
 
             <li
-              onClick={() => toggleDropdown("docs")}
-              className={`cursor-pointer flex items-center gap-1 text-[#777E90] ${isDocsOpen ? "border-b border-[#A49BFF] text-[#A49BFF]" : ""
+              onClick={() => toggleDropdown("resources")}
+              className={`cursor-pointer flex items-center gap-1 text-light-text-color ${isResourcesOpen ? "border-b border-primary-light text-primary-light" : ""
                 }`}
             >
-              Docs
+              Resources
               <img
-                src={isDocsOpen ? upArrow : downArrow}
-                alt=""
-                className="mt-1 text-[#A49BFF]"
+                src={isResourcesOpen ? upArrow : downArrow}
+                alt="arrow"
+                className="mt-1 text-primary-light"
               />
             </li>
-            {renderDropdown(isDocsOpen, [
+            {renderDropdown(isResourcesOpen, [
               "Whitepaper",
               "Github",
               "Partnership",
-              "Usecases",
-              "Features",
             ])}
 
-            <li
-              onClick={() => toggleDropdown("community")}
-              className={`cursor-pointer flex items-center gap-1 text-[#777E90] ${isCommunityOpen ? "border-b border-[#A49BFF] text-[#A49BFF]" : ""
-                }`}
-            >
-              Community
-              <img
-                src={isCommunityOpen ? upArrow : downArrow}
-                alt=""
-                className="mt-1 text-[#A49BFF]"
-              />
-            </li>
-            {renderDropdown(isCommunityOpen, [
-              "Community Hub",
-              "Events",
-              "News & Blogs",
-            ])}
           </ul>
         </div>
       </div>
 
-      <div className="gap-3 text-[#777e90] text-md font-medium items-center hidden lg:flex">
-        <span className="text-[#777E90]">Join our community</span>
+      <div className="gap-3 text-light-text-color text-md font-medium items-center hidden lg:flex">
+        <div className="flex items-center gap-2">
+          <img
+            src={communityIcon}
+            alt="communityIcon"
+            width={15}
+          />
+          <span className="text-light-text-color">Join our community</span>
+        </div>
         <a href="https://twitter.com/Polycruzz" target="_blank" rel="noopener noreferrer"><img src={twitter} height={36} width={36} alt="twitter" /></a>
         <a href="https://discord.com/invite/aJzSfPPrkg" target="_blank" rel="noopener noreferrer"><img src={discord} height={36} width={36} alt="Discord" /></a>
         <a href="https://t.me/polycruz" target="_blank" rel="noopener noreferrer"><img src={telegram} height={36} width={36} alt="telegram" /></a>
+        <button
+          // onClick={connectWallet}
+          className="px-10 py-2 rounded-md transition text-white bg-gradient-to-r from-primary to-purple"
+        >
+          Connect
+        </button>
       </div>
 
       <div className="block lg:hidden">

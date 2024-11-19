@@ -5,6 +5,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: "#4836FF",
+        "primary-light": "#A49BFF",
+        purple: "#6022E7",
+        "light-text-color": "#777E90",
+      },
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(0%)' },
